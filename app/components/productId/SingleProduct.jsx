@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import clsx from "clsx";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SingleProduct = ({ product }) => {
+  const session = useSession();
+  const router = useRouter();
   const [selectedSize, setSelectedSize] = useState(0);
   const [quantityItem, setQuantityItem] = useState(1);
   const [activeImage, setActiveImage] = useState(product?.img.at(0));
@@ -117,10 +121,18 @@ const SingleProduct = ({ product }) => {
             ))}
           </select>
         </div>
-
-        <button className="my-10 px-8 py-4 text-xl bg-[#FE6A16] text-white rounded-lg font-bold active:bg-[#e2651d] ">
-          Add To Cart
-        </button>
+        {session.status === "unauthenticated" ? (
+          <button
+            onClick={() => router.push("/login")}
+            className="my-10 px-8 py-4 text-xl bg-[#007BFF] text-white rounded-lg font-bold active:bg-[#085cb6] "
+          >
+            Login
+          </button>
+        ) : (
+          <button className="my-10 px-8 py-4 text-xl bg-[#FE6A16] text-white rounded-lg font-bold active:bg-[#e2651d] ">
+            Add To Cart
+          </button>
+        )}
       </div>
     </div>
   );

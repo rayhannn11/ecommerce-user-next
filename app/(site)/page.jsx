@@ -14,8 +14,6 @@ export default async function Homepage() {
       <BrandLogo />
       <BestSeller products={products} />
       <NewestProduct products={products} />
-      {/* Todo menampilkan product dimulai terlaris */}
-      {/* Todo menampilkan product dimulai terbaru */}
     </main>
   );
 }

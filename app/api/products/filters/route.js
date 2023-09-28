@@ -12,7 +12,7 @@ export async function GET(request) {
   const filters = {
     ...(categories && { categories: categories }),
     ...(brand && { brand: brand }),
-    ...(categories && { categories: categories }),
+    ...(size && { size: size }),
     ...(search && { title: { $regex: search, $options: "i" } }),
   };
 

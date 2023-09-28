@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Login() {
   return (
-    <div className="flex h-[31.25rem] flex-col justify-center py-9 sm:px-6 lg:px-8 bg-gray-100">
+    <div className="flex min-h-screen h-[31.25rem] flex-col justify-center  py-9 sm:px-6 lg:px-8 bg-gray-100">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center items-center gap-4">
           <div className="relative inline-block rounded-full overflow-hidden h-9 w-9 md:h-11 md:w-11 ">

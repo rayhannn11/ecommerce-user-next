@@ -11,7 +11,7 @@ const BrandLogo = () => {
         </h1>
         <div className="flex  items-center justify-center gap-6 ">
           {brandLogo?.map((item) => (
-            <div className="w-[300px] h-auto  " key={item.id}>
+            <div className="w-[300px]   h-auto  " key={item.id}>
               <img
                 className="w-[160px] h-[160px] object-scale-down "
                 alt="brand-logo"

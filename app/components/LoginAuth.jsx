@@ -42,7 +42,7 @@ const LoginAuth = () => {
           <div>
             <button
               type="submit"
-              className="mt-4 p-3 w-full font-bold rounded-md text-white bg-[#FE6A16] flex justify-center items-center gap-4"
+              className="mt-4 p-3 w-full font-bold rounded-md text-white bg-[#007BFF] active:bg-[#085cb6] flex justify-center items-center gap-4"
             >
               <BsGoogle /> Login with Google
             </button>

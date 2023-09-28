@@ -8,7 +8,7 @@ const ProductListComponent = ({ product }) => {
   var nf = new Intl.NumberFormat();
   return (
     <div
-      className="flex h-[28rem] items-center justify-center flex-col  flex-1 w-[28rem]  bg-[#f6f6f6]  border border-[#f2f0f0] relative"
+      className="flex  h-[28rem] items-center justify-center flex-col  flex-1 w-[28rem]  bg-[#f6f6f6]  border border-[#f2f0f0] relative"
       key={product._id}
     >
       <div className="flex items-center justify-center ">
