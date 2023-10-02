@@ -99,7 +99,7 @@ const Navbar = () => {
           <Link href={"/cart"}>
             <div className="wrapper-items-navbar hover:text-[#FE6A16]">
               <PiHandbagLight className="text-2xl" />
-              <h1>Cart (0)</h1>
+              <h1>Cart</h1>
             </div>
           </Link>
           {session?.data?.user ? (

@@ -7,6 +7,8 @@ import clsx from "clsx";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const SingleProduct = ({ product }) => {
   const session = useSession();
@@ -15,6 +17,38 @@ const SingleProduct = ({ product }) => {
   const [quantityItem, setQuantityItem] = useState(1);
   const [activeImage, setActiveImage] = useState(product?.img.at(0));
   var nf = new Intl.NumberFormat();
+  const email = session?.data?.user?.email;
+  console.log(email, "email");
+
+  const addToCart = () => {
+    if (selectedSize !== 0 && email) {
+      function successCart() {
+        toast.success("Product Add to Cart");
+        router.push("/cart");
+      }
+      const productCartId = new Date().getTime().toString();
+      const data = {
+        userEmail: email,
+        products: {
+          productCartId: productCartId,
+          productId: product?._id,
+          title: product?.title,
+          img: product?.img.at(0),
+          categories: product?.categories,
+          size: product?.size,
+          price: product?.price,
+          brand: product?.brand.at(0),
+          countInStock: product?.countInStock,
+          quantityItem: quantityItem,
+          selectedSize: selectedSize,
+        },
+      };
+      console.log(data);
+      axios.post("/api/cart/add", data).then(() => successCart());
+    } else {
+      toast.error("Tolong Pilih Ukuran Sepatu !");
+    }
+  };
 
   return (
     <div
@@ -28,6 +62,7 @@ const SingleProduct = ({ product }) => {
             <div
               className="relative border border-[#000] h-16 w-16 cursor-pointer"
               onMouseOver={() => setActiveImage(img)}
+              key={img}
             >
               <Image
                 src={img}
@@ -129,7 +164,10 @@ const SingleProduct = ({ product }) => {
             Login
           </button>
         ) : (
-          <button className="my-10 px-8 py-4 text-xl bg-[#FE6A16] text-white rounded-lg font-bold active:bg-[#e2651d] ">
+          <button
+            onClick={addToCart}
+            className="my-10 px-8 py-4 text-xl bg-[#FE6A16] text-white rounded-lg font-bold active:bg-[#e2651d] "
+          >
             Add To Cart
           </button>
         )}
