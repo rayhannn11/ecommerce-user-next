@@ -3,13 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const CartItem = ({ item }) => {
   var nf = new Intl.NumberFormat();
-
+  const router = useRouter();
   const handleRemoveItem = (id) => {
     function deleteSucces(res) {
       toast.success("Item Has Been Removed");
+      router.refresh();
       console.log(res);
     }
     axios
@@ -29,7 +31,20 @@ const CartItem = ({ item }) => {
         id,
         selectedSize,
       })
-      .then((res) => console.log(res.data))
+      .then((res) => router.refresh())
+      .catch((err) => toast.error("Something went wrong"));
+  };
+
+  const handleQuantityItem = (item, value) => {
+    const id = item._id;
+    const quantityItem = value;
+
+    axios
+      .put("/api/cart/updateQuantity", {
+        id,
+        quantityItem,
+      })
+      .then((res) => router.refresh())
       .catch((err) => toast.error("Something went wrong"));
   };
 
@@ -46,7 +61,7 @@ const CartItem = ({ item }) => {
         />
         <div className="flex flex-col mx-5 my-0">
           <div className="font-bold text-lg cursor-pointer mb-[0.4rem]">
-            <Link href={`/products/${item?.productId}`}>{item?.title}</Link>
+            <Link href={`/products/id/${item?.productId}`}>{item?.title}</Link>
           </div>
           <div className="flex font-[lighter]  gap-4">
             {item?.categories?.map((categorie) => (
@@ -81,14 +96,7 @@ const CartItem = ({ item }) => {
               <select
                 className=" text-base text-[#6f6c6c] cursor-pointer pr-2.5 border-[none]"
                 value={item?.quantityItem}
-                // onChange={(e) =>
-                //   dispatch(
-                //     updateCartQty({
-                //       ...item,
-                //       quantityItem: Number(e.target.value),
-                //     })
-                //   )
-                // }
+                onChange={(e) => handleQuantityItem(item, e.target.value)}
               >
                 {[...Array(item?.countInStock).keys()].map((x) => (
                   <option key={x + 1} value={x + 1}>

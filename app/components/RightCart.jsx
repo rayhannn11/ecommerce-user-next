@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 
-const RightCart = ({ total, email, cartItem }) => {
+const RightCart = ({ total, email, cart }) => {
   var nf = new Intl.NumberFormat();
   const router = useRouter();
   const deleteProducts = (userEmail) => {
@@ -24,21 +24,19 @@ const RightCart = ({ total, email, cartItem }) => {
       <h2 className="font-medium text-xl mb-5">TOTAL BELANJA</h2>
       <div className="flex justify-between">
         <p className=" text-lg mb-2.5">Subtotal:</p>
-        {cartItem.length === 0 ? " Rp. 0.00" : ` Rp. ${nf.format(total)}`}
+        {cart.length === 0 ? " Rp. 0.00" : ` Rp. ${nf.format(total)}`}
       </div>
       <div className="flex justify-between">
         <p className=" text-lg mb-2.5">Estimasi Biaya Pengiriman:</p>
-        {cartItem.length === 0 ? " Rp. 0.00" : `Rp. 25,000`}
+        {cart.length === 0 ? " Rp. 0.00" : `Rp. 25,000`}
       </div>
       <div className="flex justify-between">
         <p className=" text-lg mb-2.5">Total:</p>
-        {cartItem.length === 0
-          ? " Rp. 0.00"
-          : ` Rp. ${nf.format(total + 25000)} `}
+        {cart.length === 0 ? " Rp. 0.00" : ` Rp. ${nf.format(total + 25000)} `}
       </div>
       <div className="border mx-0 my-2.5 border-solid border-[#cccbcb]"></div>
       {/* Button */}
-      {cartItem.length === 0 ? (
+      {cart.length === 0 ? (
         <button
           className={
             "bg-neutral-100 text-[#9e9b9b] font-[bold] mt-5 p-5 rounded-[30px] border-[none] cursor-default"
@@ -58,7 +56,7 @@ const RightCart = ({ total, email, cartItem }) => {
       )}
       <button
         className={clsx(
-          cartItem.length === 0
+          cart.length === 0
             ? "bg-neutral-100 text-[#9e9b9b] font-[bold] mt-5 p-5 rounded-[30px] border-[none] cursor-default"
             : "border bg-transparent text-[#c91515] text-base cursor-pointer mt-[30px] p-2.5 rounded-[30px] border-solid border-[#c91515] hover:bg-[#c91515] hover:text-[#fff] active:bg-[rgb(142,11,11)] active:text-[#fff]"
         )}

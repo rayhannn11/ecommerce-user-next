@@ -7,16 +7,9 @@ export async function PUT(request) {
   const body = await request.json();
   const { id, selectedSize } = body;
 
-  console.log(id, selectedSize, "api");
-
-  const cart = await Cart.findByIdAndUpdate(
-    { _id: id },
-    {
-      $set: {
-        "products.selectedSize": selectedSize,
-      },
-    }
-  );
+  const cart = await Cart.findByIdAndUpdate(id, {
+    selectedSize,
+  });
 
   return NextResponse.json(cart);
 }

@@ -26,22 +26,19 @@ const SingleProduct = ({ product }) => {
         toast.success("Product Add to Cart");
         router.push("/cart");
       }
-      const productCartId = new Date().getTime().toString();
+
       const data = {
         userEmail: email,
-        products: {
-          productCartId: productCartId,
-          productId: product?._id,
-          title: product?.title,
-          img: product?.img.at(0),
-          categories: product?.categories,
-          size: product?.size,
-          price: product?.price,
-          brand: product?.brand.at(0),
-          countInStock: product?.countInStock,
-          quantityItem: quantityItem,
-          selectedSize: selectedSize,
-        },
+        productId: product?._id,
+        title: product?.title,
+        img: product?.img.at(0),
+        categories: product?.categories,
+        size: product?.size,
+        price: product?.price,
+        brand: product?.brand.at(0),
+        countInStock: product?.countInStock,
+        quantityItem: quantityItem,
+        selectedSize: selectedSize,
       };
       console.log(data);
       axios.post("/api/cart/add", data).then(() => successCart());
