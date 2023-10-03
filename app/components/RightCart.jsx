@@ -3,10 +3,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import useCartTotal from "../hooks/useCartTotal";
+import { useEffect } from "react";
 
 const RightCart = ({ total, email, cart }) => {
   var nf = new Intl.NumberFormat();
   const router = useRouter();
+  const { setTotalCart } = useCartTotal();
+
   const deleteProducts = (userEmail) => {
     function deleteSucces() {
       toast.success("Cart Has Been Removed");
@@ -19,6 +23,12 @@ const RightCart = ({ total, email, cart }) => {
       .then(() => deleteSucces())
       .catch((err) => toast.error("Something went wrong"));
   };
+
+  const goToShipment = (total) => {
+    setTotalCart(total);
+    router.push("/account/shipment");
+  };
+
   return (
     <div className=" w-full max-h-[400px] flex flex-col justify-end text-black ml-[50px] ">
       <h2 className="font-medium text-xl mb-5">TOTAL BELANJA</h2>
@@ -49,7 +59,7 @@ const RightCart = ({ total, email, cart }) => {
           className={
             "bg-[#111111] text-[white] font-[bold] cursor-pointer mt-5 p-5 rounded-[30px] border-[none] active:bg-[#030303]"
           }
-          // onClick={() => console.log("buy item")}
+          onClick={() => goToShipment(total)}
         >
           CHECKOUT SEKARANG
         </button>
