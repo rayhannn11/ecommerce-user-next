@@ -6,8 +6,9 @@ import getCartByEmail from "../../actions/getCartByEmail";
 
 const Shipment = async () => {
   const session = await getSession();
+  const userEmail = session?.user?.email;
 
-  const cart = await getCartByEmail(session?.user?.email);
+  const cart = await getCartByEmail(userEmail);
   return (
     <div className="flex min-h-screen h-[31.25rem] flex-col justify-center  py-9 sm:px-6 lg:px-8 bg-gray-100">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -18,7 +19,7 @@ const Shipment = async () => {
           <h1 className="text-[#E83C00] text-3xl font-bold italic">Shipment</h1>
         </div>
       </div>
-      <ShipmentForm cart={cart} />
+      <ShipmentForm cart={cart} userEmail={userEmail} />
     </div>
   );
 };

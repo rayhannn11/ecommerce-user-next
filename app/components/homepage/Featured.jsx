@@ -20,7 +20,7 @@ const Featured = () => {
             ke mana pun Anda pergi
           </h2>
 
-          <Link href={`/products/${idProduct}`}>
+          <Link href={`/products/id/${idProduct}`}>
             <button className="px-8 py-4 text-xl bg-[#FE6A16] text-white rounded-lg font-bold">
               See Product
             </button>

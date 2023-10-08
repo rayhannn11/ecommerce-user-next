@@ -6,7 +6,7 @@ const getCartByEmail = async (userEmail) => {
     await mongooseConnect();
     const cart = await Cart.find({ userEmail });
     const jsonCart = JSON.parse(JSON.stringify(cart));
-    console.log(cart);
+
     return jsonCart;
   } catch (err) {
     console.log(err);

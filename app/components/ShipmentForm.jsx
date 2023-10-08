@@ -5,22 +5,89 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import useCartStore from "../hooks/useCartTotal";
+import { useSession } from "next-auth/react";
 
-const ShipmentForm = ({ cart }) => {
+const ShipmentForm = ({ cart, userEmail }) => {
   const [customer, setCustomer] = useState("");
   const [address, setAddress] = useState("");
   const [telephone, setTelephone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const { totalCart } = useCartStore();
-  console.log(totalCart);
+  const session = useSession();
+  const router = useRouter();
 
-  //   Cart itu array jadi iterete untuk create order pada property products
   const handleForm = async (ev) => {
     ev.preventDefault();
 
     if (customer && address && telephone) {
-      // console.log(typeof parseInt(telephone));
+      try {
+        setIsLoading(true);
+        const titleArr = cart.map((item) => item.title);
+
+        const countInStockArr = cart.map((item) => item.countInStock);
+
+        const data = {
+          email: userEmail,
+          customer,
+          products: cart?.map((item) => ({
+            productId: item?.productId,
+            title: item?.title,
+            img: item?.img,
+            categories: item?.categories,
+            brand: item?.brand,
+            price: item?.price,
+            quantity: item?.quantityItem,
+            selectedSize: item?.selectedSize,
+          })),
+          address,
+          telephone: parseInt(telephone),
+          total: totalCart,
+        };
+
+        const res = await axios.post("/api/orders/add", data);
+
+        if (res.status === 200) {
+          try {
+            const getProductUpdate = titleArr.map((title) => {
+              return axios.get(`/api/products/get`, { title });
+            });
+
+            Promise.all(getProductUpdate)
+              .then((responses) => {
+                console.log(responses.data);
+                const productRequests = responses.data.map((item) => {
+                  return axios.put(
+                    `/api/products/update?productId=${item._id}`,
+                    {
+                      countInStock: item.countInStock - 1,
+                      sold: item.sold + 1,
+                    }
+                  );
+                });
+                return productRequests;
+              })
+              .then((productRequests) => {
+                Promise.all(productRequests)
+                  .then((res) => console.log(res.data))
+                  .catch((err) => console.log(err));
+              })
+              .catch((error) => {
+                console.error("Error fetching products:", error);
+              });
+            // TODO CLEAR CART
+            router.push(`/account/orders/${session?.data?.user?.email}`);
+          } catch (error) {
+            console.log(error);
+          } finally {
+            setIsLoading(false);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       toast.error("Harap Isi Data Pengiriman");
     }
@@ -168,7 +235,7 @@ const ShipmentForm = ({ cart }) => {
               type="submit"
               className="mt-4 p-3 w-full font-bold rounded-md text-white bg-[#111] active:bg-[#000] flex justify-center items-center gap-4"
             >
-              Konfirmasi Pembelian
+              {isLoading ? "Loading..." : "Konfirmasi Pembelian"}
             </button>
           </div>
         </form>

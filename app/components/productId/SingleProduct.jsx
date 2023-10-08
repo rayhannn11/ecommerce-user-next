@@ -18,7 +18,6 @@ const SingleProduct = ({ product }) => {
   const [activeImage, setActiveImage] = useState(product?.img.at(0));
   var nf = new Intl.NumberFormat();
   const email = session?.data?.user?.email;
-  console.log(email, "email");
 
   const addToCart = () => {
     if (selectedSize !== 0 && email) {
