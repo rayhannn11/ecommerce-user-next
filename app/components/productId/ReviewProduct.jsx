@@ -2,9 +2,9 @@ import React from 'react';
 
 const ReviewProduct = ({ reviews }) => {
   return (
-    <div className='h-auto w-[70rem] flex flex-col justify-start items-start  gap-5 mx-0 my-20'>
-      <h1 className='text-3xl font-bold'>Review Product</h1>
-      {reviews ? (
+    <div className='h-auto w-[70rem] flex flex-col gap-5 mx-0 my-20'>
+      <h1 className='text-3xl font-bold text-start'>Review Product</h1>
+      {reviews && reviews.length > 0 ? (
         reviews.map((review) => (
           <div
             className='flex flex-col bg-[#F3F5F7] w-full p-8'
@@ -38,7 +38,9 @@ const ReviewProduct = ({ reviews }) => {
           </div>
         ))
       ) : (
-        <div>No Review Added</div>
+        <div className='flex justify-center items-center mt-10'>
+          <h3 className='text-3xl text-center'>Belum Ada Review Product</h3>
+        </div>
       )}
     </div>
   );
