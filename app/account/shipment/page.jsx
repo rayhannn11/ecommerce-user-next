@@ -10,7 +10,7 @@ const Shipment = async () => {
 
   const cart = await getCartByEmail(userEmail);
   return (
-    <div className="flex min-h-screen h-[31.25rem] flex-col justify-center  py-9 sm:px-6 lg:px-8 bg-gray-100">
+    <div className="flex min-h-screen h-[31.25rem] flex-col justify-center py-9 sm:px-6  pt-16 lg:pt-10 lg:px-8 bg-gray-100">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center items-center gap-4">
           <div className="relative inline-block overflow-hidden h-12 w-12 md:h-11 md:w-11 ">

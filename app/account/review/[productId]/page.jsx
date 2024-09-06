@@ -46,7 +46,7 @@ const Review = ({ params }) => {
     }
   };
   return (
-    <div className="p-[50px] w-2/4 mx-auto pt-[13.5rem] h-full">
+    <div className="flex flex-col items-center justify-center w-2/4 mx-auto py-8 lg:pt-[6.5rem] h-full">
       <div className="bg-white px-4 py-8  sm:px-10">
         <form className="space-y-6" onSubmit={handleForm}>
           {/* Desc */}
@@ -65,13 +65,13 @@ const Review = ({ params }) => {
               Berikan Ulasan Anda
             </label>
             <textarea
-              className="border border-gray-200 rounded-sm  w-full py-6 px-3"
+              className="border border-gray-200 rounded-sm  w-full py-6 px-3 resize-none"
               placeholder="description"
               value={desc}
               onChange={(ev) => setDesc(ev.target.value)}
             />
           </div>
-          <div className="flex gap-3 items-center justify-end">
+          <div className="flex flex-col md:flex-row gap-3 items-center justify-end">
             <label
               htmlFor="rating"
               className="

@@ -13,25 +13,13 @@ const OrdersList = ({ initialItems }) => {
   return (
     <aside
       className={clsx(
-        `
-  fixed
-  inset-y-0 
-  pt-[9.4rem]
-  lg:w-80 
-  lg:block
-  overflow-y-auto 
-  border-r 
-  border-gray-200 
-  
-`,
-        isOpen ? "hidden" : "block w-full left-0"
+        `inset-y-0 pt-[4.4rem] w-full lg:w-80  overflow-y-auto block  left-0 `
       )}
     >
-      <div className="px-5 ">
+      <div className="px-5">
         <div className="mb-4 pt-4 text-2xl font-bold text-neutral-800">
           Pesanan Anda
         </div>
-
         {items.map((item) => (
           <OrderList
             key={item.id}

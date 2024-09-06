@@ -48,12 +48,12 @@ const SingleProduct = ({ product }) => {
 
   return (
     <div
-      className="h-full w-[70rem]  flex  justify-center items-center"
+      className="flex flex-col md:flex-row justify-center items-center w-full h-full max-w-[1200px] gap-20 px-4 md:px-10 lg:px-16 pt-10"
       key={product?._id}
     >
       {/* image component */}
-      <div className="w-[60%] flex pb-28 mr-10 items-start justify-start">
-        <div className="flex flex-col gap-3 mr-6">
+      <div className="w-full md:w-[60%] flex flex-col md:flex-row">
+        <div className="flex md:flex-col gap-3 mr-0 md:mr-6 ">
           {product?.img?.map((img) => (
             <div
               className="relative border border-[#000] h-16 w-16 cursor-pointer"
@@ -69,18 +69,20 @@ const SingleProduct = ({ product }) => {
             </div>
           ))}
         </div>
-        <Image
-          src={activeImage || <Skeleton />}
-          alt="Product Image"
-          width="600"
-          height="400"
-          className="bg-[#F6F6F6]"
-        />
+        <div className="relative  w-full mt-4 md:mt-0">
+          <img
+            src={activeImage || <Skeleton />}
+            alt="Product Image"
+            className="w-full h-[600px] bg-[#F6F6F6] object-fill"
+          />
+        </div>
       </div>
       {/* Product component */}
-      <div className="flex pt-7 flex-col w-[40%]">
+      <div className="flex flex-col w-full md:w-[40%] md:pt-10">
         <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold mb-3">{product?.title}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-3">
+            {product?.title}
+          </h1>
           {!isNaN(product?.totalStars / product?.countReviewers) && (
             <div className="flex items-center gap-1">
               {Array(Math.round(product?.totalStars / product?.countReviewers))
@@ -100,7 +102,7 @@ const SingleProduct = ({ product }) => {
           )}
         </div>
         <div className="flex gap-3 mb-6 text-md font-semibold">
-          <div className="flex gap-3 ">
+          <div className="flex gap-3 flex-wrap">
             {product?.categories.map((categorie) => (
               <Link href={`/products/categories/${categorie}`}>
                 <h1 key={categorie}>
@@ -117,18 +119,18 @@ const SingleProduct = ({ product }) => {
             <h1>{product?.brand.at(0)}</h1>
           </div>
         </div>
-        <p className="text-lg">{product?.desc}</p>
-        <p className="text-xl my-4 font-semibold">
+        <p className="text-md md:text-lg">{product?.desc}</p>
+        <p className="text-lg md:text-xl my-4 font-semibold">
           Rp. {nf.format(product?.price)}
         </p>
         {/* Size */}
-        <h3 className="text-xl mt-4">Select Size</h3>
-        <div className=" flex items-center justify-start flex-wrap my-5">
+        <h3 className="text-lg md:text-xl mt-4">Select Size</h3>
+        <div className="flex items-center justify-start flex-wrap my-5">
           {product?.size.slice(0, product.size.length - 1).map((size) => (
             <select
               className={clsx(
-                "appearance-none text-lg  h-12 w-[120px] border border-[#000] rounded-[6px] m-1 cursor-pointer overflow-hidden text-center ",
-                size === selectedSize && "text-white bg-[#000] "
+                "appearance-none text-lg h-12 w-[120px] border border-[#000] rounded-[6px] m-1 cursor-pointer overflow-hidden text-center",
+                size === selectedSize && "text-white bg-[#000]"
               )}
               key={size}
               onClick={(e) => setSelectedSize(e.target.value)}
@@ -139,11 +141,11 @@ const SingleProduct = ({ product }) => {
         </div>
         {/* Quantity */}
         <div className="flex items-center m-3 mb-5">
-          <h3 className="text-xl ">Select Quantity :</h3>
+          <h3 className="text-lg md:text-xl">Select Quantity :</h3>
           <select
             value={quantityItem}
             onChange={(e) => setQuantityItem(e.target.value)}
-            className="p-3 pr-5 text-lg ml-5 border border-[#000] "
+            className="p-3 pr-5 text-lg ml-5 border border-[#000]"
           >
             {[...Array(product?.countInStock).keys()].map((x) => (
               <option key={x + 1} value={x + 1}>
@@ -155,14 +157,14 @@ const SingleProduct = ({ product }) => {
         {session.status === "unauthenticated" ? (
           <button
             onClick={() => router.push("/login")}
-            className="my-10 px-8 py-4 text-xl bg-[#007BFF] text-white rounded-lg font-bold active:bg-[#085cb6] "
+            className="my-10 px-8 py-4 text-lg md:text-xl bg-[#007BFF] text-white rounded-lg font-bold active:bg-[#085cb6]"
           >
             Login
           </button>
         ) : (
           <button
             onClick={addToCart}
-            className="my-10 px-8 py-4 text-xl bg-[#FE6A16] text-white rounded-lg font-bold active:bg-[#e2651d] "
+            className="my-10 px-8 py-4 text-lg md:text-xl bg-[#FE6A16] text-white rounded-lg font-bold active:bg-[#e2651d]"
           >
             Add To Cart
           </button>

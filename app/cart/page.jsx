@@ -26,22 +26,21 @@ const cart = async () => {
   );
 
   return (
-    <div className="min-h-full w-[90%] flex items-start justify-center relative pt-[11rem] mt-5 mb-10 ">
-      <div className="flex items-start justify-center w-[90%]">
+    <div className="min-h-full w-[90%] flex flex-col lg:flex-row items-start justify-center relative pt-[3rem] md:pt-[6rem] mb-10 mx-auto">
+      <div className="flex flex-col lg:flex-row items-start justify-center w-full">
         {/* Left Cart */}
-        <div className="flex-[2] flex flex-col">
+        <div className="flex-[2] w-full lg:w-[60%] flex flex-col mb-6 lg:mb-0 items-center lg:items-start">
           <div className="text-2xl font-medium mb-2.5">
             Keranjang Belanja ({cart.length})
           </div>
-          <div className="border w-[26%] mb-6 border-solid border-black"></div>
+          <div className="border w-[40%] lg:w-[26%] mb-6 border-solid border-black"></div>
           {cart.length === 0 ? (
             <>
               <h3 className="text-xl font-[normal]">
-                Tidak ada barang didalam keranjang belanja anda.
+                Tidak ada barang di dalam keranjang belanja anda.
               </h3>
-
               <u className="text-lg font-[bold] mt-3.5 active:text-[#E83C00]">
-                <Link href={"/products"}>Belanja Sekarang. </Link>
+                <Link href={"/products"}>Belanja Sekarang.</Link>
               </u>
             </>
           ) : (
@@ -55,7 +54,7 @@ const cart = async () => {
           )}
         </div>
         {/* Right Cart */}
-        <div className="flex-[1] h-max max-h-[400px] sticky top-[100px]">
+        <div className="flex-[1] w-full lg:w-[40%] h-max max-h-[400px] sticky top-[100px] lg:mr-12">
           <RightCart total={total} email={email} cart={cart} />
         </div>
       </div>

@@ -16,6 +16,10 @@ li {
   @apply flex items-center gap-2 cursor-pointer;
 }
 
+.menu-item {
+  @apply w-full px-4 cursor-pointer hover:bg-[#FE6A16] hover:text-white;
+}
+
 .link {
   display: inline-block;
 }

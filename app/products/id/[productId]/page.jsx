@@ -9,7 +9,7 @@ const product = async ({ params }) => {
   const reviews = await getReview(params.productId);
 
   return (
-    <div className="py-10 px-3 w-full h-auto min-h-full gap-10  flex flex-col items-center justify-center pt-44">
+    <div className="py-10 px-3 w-full h-auto min-h-full flex flex-col items-center justify-center pt-10 gap-10">
       <SingleProduct product={product} />
       <ReviewProduct reviews={reviews} />
     </div>

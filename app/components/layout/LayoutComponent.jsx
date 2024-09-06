@@ -6,9 +6,7 @@ const LayoutComponent = ({ children }) => {
   return (
     <>
       <Navbar />
-        <div className="min-h-full h-auto">
-          {children}
-        </div>
+      <div className="min-h-full h-auto pt-20">{children}</div>
       <Footer />
     </>
   );

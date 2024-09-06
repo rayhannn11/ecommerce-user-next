@@ -1,16 +1,16 @@
-'use client';
-import axios from 'axios';
-import clsx from 'clsx';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import useCartStore from '../hooks/useCartTotal';
-import { useSession } from 'next-auth/react';
+"use client";
+import axios from "axios";
+import clsx from "clsx";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import useCartStore from "../hooks/useCartTotal";
+import { useSession } from "next-auth/react";
 
 const ShipmentForm = ({ cart, userEmail }) => {
-  const [customer, setCustomer] = useState('');
-  const [address, setAddress] = useState('');
-  const [telephone, setTelephone] = useState('');
+  const [customer, setCustomer] = useState("");
+  const [address, setAddress] = useState("");
+  const [telephone, setTelephone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const { totalCart } = useCartStore();
@@ -42,7 +42,7 @@ const ShipmentForm = ({ cart, userEmail }) => {
           total: totalCart,
         };
 
-        const res = await axios.post('/api/orders/add', data);
+        const res = await axios.post("/api/orders/add", data);
 
         console.log(res.status);
         if (res.status === 200) {
@@ -60,31 +60,31 @@ const ShipmentForm = ({ cart, userEmail }) => {
         setIsLoading(false);
       }
     } else {
-      toast.error('Harap Isi Data Pengiriman');
+      toast.error("Harap Isi Data Pengiriman");
     }
   };
 
   return (
-    <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-      <div className='bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
-        <form className='space-y-6' onSubmit={handleForm}>
+    <div className="my-8 sm:mx-auto sm:w-full md:max-w-md">
+      <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-6">
+        <form className="space-y-6" onSubmit={handleForm}>
           {/*Customer Name  */}
           <div>
             <label
-              htmlFor='customer'
-              className='
+              htmlFor="customer"
+              className="
           block 
           text-sm 
           font-medium 
           leading-6 
           text-gray-900
-        '
+        "
             >
               Nama Customer
             </label>
-            <div className='mt-2'>
+            <div className="mt-2">
               <input
-                id='customer'
+                id="customer"
                 disabled={isLoading}
                 className={clsx(
                   `
@@ -105,7 +105,7 @@ const ShipmentForm = ({ cart, userEmail }) => {
             focus:ring-sky-600 
             sm:text-sm 
             sm:leading-6`,
-                  isLoading && 'opacity-50 cursor-default'
+                  isLoading && "opacity-50 cursor-default"
                 )}
                 value={customer}
                 onChange={(e) => setCustomer(e.target.value)}
@@ -115,20 +115,20 @@ const ShipmentForm = ({ cart, userEmail }) => {
           {/* Address */}
           <div>
             <label
-              htmlFor='address'
-              className='
+              htmlFor="address"
+              className="
           block 
           text-sm 
           font-medium 
           leading-6 
           text-gray-900
-        '
+        "
             >
               Alamat Pengiriman
             </label>
-            <div className='mt-2'>
+            <div className="mt-2">
               <input
-                id='address'
+                id="address"
                 disabled={isLoading}
                 className={clsx(
                   `
@@ -149,7 +149,7 @@ const ShipmentForm = ({ cart, userEmail }) => {
             focus:ring-sky-600 
             sm:text-sm 
             sm:leading-6`,
-                  isLoading && 'opacity-50 cursor-default'
+                  isLoading && "opacity-50 cursor-default"
                 )}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -159,20 +159,20 @@ const ShipmentForm = ({ cart, userEmail }) => {
           {/* Telephone */}
           <div>
             <label
-              htmlFor='telephone'
-              className='
+              htmlFor="telephone"
+              className="
           block 
           text-sm 
           font-medium 
           leading-6 
           text-gray-900
-        '
+        "
             >
               Telephone
             </label>
-            <div className='mt-2'>
+            <div className="mt-2">
               <input
-                id='telephone'
+                id="telephone"
                 disabled={isLoading}
                 className={clsx(
                   `
@@ -193,7 +193,7 @@ const ShipmentForm = ({ cart, userEmail }) => {
             focus:ring-sky-600 
             sm:text-sm 
             sm:leading-6`,
-                  isLoading && 'opacity-50 cursor-default'
+                  isLoading && "opacity-50 cursor-default"
                 )}
                 value={telephone}
                 onChange={(e) => setTelephone(e.target.value)}
@@ -203,10 +203,10 @@ const ShipmentForm = ({ cart, userEmail }) => {
           {/* Button */}
           <div>
             <button
-              type='submit'
-              className='mt-4 p-3 w-full font-bold rounded-md text-white bg-[#111] active:bg-[#000] flex justify-center items-center gap-4'
+              type="submit"
+              className="mt-4 p-3 w-full font-bold rounded-md text-white bg-[#111] active:bg-[#000] flex justify-center items-center gap-4"
             >
-              {isLoading ? 'Loading...' : 'Konfirmasi Pembelian'}
+              {isLoading ? "Loading..." : "Konfirmasi Pembelian"}
             </button>
           </div>
         </form>

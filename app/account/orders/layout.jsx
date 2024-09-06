@@ -13,10 +13,12 @@ export default async function ConversationsLayout({ children }) {
   console.log(orders);
 
   return (
-    <div className="h-full h-auto">
-      <div className="h-full  ">
+    <div className="min-h-full h-auto">
+      <div className="h-full flex flex-col lg:flex-row ">
         <OrdersList initialItems={orders} />
-        {children}
+        <div className="w-full min-h-full h-auto lg:w-[calc(100%-20rem)] border-l border-[#E5E7EB] flex flex-col">
+          {children}
+        </div>
       </div>
     </div>
   );

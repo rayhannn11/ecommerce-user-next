@@ -10,7 +10,10 @@ const Home = () => {
 
   return (
     <div
-      className={clsx(`lg:pl-80 h-full lg:block`, isOpen ? "block" : "hidden")}
+      className={clsx(
+        `h-full flex flex-col items-center justify-center  w-full lg:block`,
+        isOpen ? "hidden" : "block"
+      )}
     >
       <EmptyState />
     </div>

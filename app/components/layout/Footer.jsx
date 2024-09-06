@@ -5,15 +5,15 @@ import { SiGooglemaps } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <div className="h-[26rem] py-4 border-b-[1px]  flex flex-col bg-[#e9e9e9] justify-start pt-10 items-center">
+    <div className="h-auto py-4 border-b-[1px]  flex flex-col bg-[#e9e9e9] justify-start pt-10 items-center">
       <div className="flex  items-center gap-4">
         <h1 className=" text-4xl font-bold italic text-[#E83C00]">SNEAKER</h1>
       </div>
-      <h2 className="text-center my-10 w-[40%] text-lg">
+      <h2 className="text-center my-5 mx-auto w-[90%] sm:w-[80%] md:w-[60%] lg:w-[50%] xl:w-[40%] text-base sm:text-lg lg:text-xl leading-relaxed">
         Toko sepatu <i>SNEAKER</i> menawarkan sepatu dengan kualitas harga
-        terbaik dan ramah dikantong. <i>SNEAKER</i> menyediakan sepatu sneakers
-        dari berbagai brand pilihan seperti vans, converse, nike dan adiddas.
-        Kami beroperasional setiap hari mulai dari pukul 10:00 AM – 22:00 PM.{" "}
+        terbaik dan ramah di kantong. <i>SNEAKER</i> menyediakan sepatu sneakers
+        dari berbagai brand pilihan seperti Vans, Converse, Nike, dan Adidas.
+        Kami beroperasi setiap hari mulai dari pukul 10:00 AM – 22:00 PM.
       </h2>
       <h4 className="text-sm">
         Copyright © 2023 Rayhan Naufal. All Rights Reserved
